@@ -1,0 +1,104 @@
+GET http://localhost:4004/CatalogService
+
+### Read Service metadata
+GET http://localhost:4004/CatalogService/$metadata
+
+### Get Top 2 employees
+GET http://localhost:4004/CatalogService/EmployeeSet?$top=2
+
+###POST Call - Create new employee
+POST http://localhost:4004/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+      "ID": "50BD2137-0890-1EEA-A6C2-BB33C33433FC",
+      "nameFirst": "K",
+      "nameMiddle": null,
+      "nameLast": "Chinni",
+      "nameInitials": null,
+      "sex": "F",
+      "language": "E",
+      "phoneNumber": "+1 224 374 5241",
+      "email": "chinni@gmail.com",
+      "loginName": "KChinni",
+      "Currency_code": "USD",
+      "salaryAmount": 33000,
+      "accountNumber": "111222333",
+      "bankId": "51000655",
+      "bankName": "My Bank of Antioch"
+    }
+
+###Get the employee which was created
+GET  http://localhost:4004/CatalogService/EmployeeSet/50BD2137-0890-1EEA-A6C2-BB33C33433FC
+
+### Update employee Salary
+PATCH http://localhost:4004/CatalogService/EmployeeSet/50BD2137-0890-1EEA-A6C2-BB33C33433FC
+Content-Type: application/json
+
+{
+    "salaryAmount": 7500000,
+    "Currency_code": "EUR"
+}
+
+###Display All Purchase Orders
+http://localhost:4004/CatalogService/POs
+
+###Get Single PO
+http://localhost:4004/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+###Get main entity and associated entity together
+http://localhost:4004/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+###Boosting a order
+POST http://localhost:4004/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/CatalogService.boost
+Content-Type: application/json
+
+{}
+
+
+###Largest order
+GET http://localhost:4004/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/CatalogService.largestOrder()
+
+###Custom Code - Entity GET
+GET http://localhost:4004/mysrvdemo/ReadEmployeeSrv
+
+###Custom Code - Entity GET with dynamic where
+GET http://localhost:4004/mysrvdemo/ReadEmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+
+### section - 19
+###POST to insert data
+POST http://localhost:4004/mysrvdemo/InsertEmployeeSrv
+Content-Type: application/json
+
+{
+      "ID": "50BD2137-0890-1EEA-A3C3-BB33C33433FC",
+      "nameFirst": "PK",
+      "nameMiddle": null,
+      "nameLast": "KJS",
+      "nameInitials": null,
+      "sex": "F",
+      "language": "E",
+      "phoneNumber": "+1 224 374 5241",
+      "email": "pk@gmail.com",
+      "loginName": "KChinni",
+      "Currency_code": "USD",
+      "salaryAmount": 95000,
+      "accountNumber": "111222333",
+      "bankId": "51000655",
+      "bankName": "My Bank of Antioch"
+    }
+
+###PATCH to Update data
+PATCH http://localhost:4004/mysrvdemo/UpdateEmployeeSrv/50BD2137-0890-1EEA-A3C3-BB33C33433FC
+Content-Type: application/json
+
+{
+    "loginName": "Updated"
+}
+
+### To check the record,
+GET http://localhost:4004/mysrvdemo/ReadEmployeeSrv/50BD2137-0890-1EEA-A3C3-BB33C33433FC
+
+###Delete to data
+DELETE http://localhost:4004/mysrvdemo/DeleteEmployeeSrv/50BD2137-0890-1EEA-A3C3-BB33C33433FC
+Content-Type: application/json
